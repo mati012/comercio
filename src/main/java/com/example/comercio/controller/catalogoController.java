@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/catalogos")
-@CrossOrigin(origins = "*")
+@RequestMapping("/catalogos")
 public class catalogoController {
 
     @Autowired
