@@ -1,0 +1,15 @@
+FROM openjdk:17-jdk-slim
+
+WORKDIR /app
+
+# Copia el archivo JAR de la aplicación
+COPY target/*.jar app.jar
+
+# Copia el wallet a la misma ruta que usas en el properties
+COPY src/main/resources/wallet /app/wallet
+
+# Expone el puerto de Spring Boot
+EXPOSE 8080
+
+# Ejecuta la aplicación
+ENTRYPOINT ["java", "-jar", "app.jar"]
