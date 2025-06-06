@@ -1,7 +1,7 @@
 package com.example.comercio.service;
 
-import com.example.comercio.model.producto;
-import com.example.comercio.repository.productoRepository;
+import com.example.comercio.model.ProductoEntity;
+import com.example.comercio.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,29 +9,29 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class productoServiceImpl implements productoService {
+public class ProductoServiceImpl implements ProductoService {
 
     @Autowired
-    private productoRepository productoRepo;
+    private ProductoRepository productoRepo;
 
     @Override
-    public List<producto> listarProductos() {
+    public List<ProductoEntity> listarProductos() {
         return productoRepo.findAll();
     }
 
     @Override
-    public Optional<producto> buscarPorId(Long id) {
+    public Optional<ProductoEntity> buscarPorId(Long id) {
         return productoRepo.findById(id);
     }
 
     @Override
-    public producto crear(producto p) {
+    public ProductoEntity crear(ProductoEntity p) {
         return productoRepo.save(p);
     }
 
     @Override
-    public producto editar(Long id, producto actualizado) {
-        producto p = productoRepo.findById(id).orElseThrow();
+    public ProductoEntity editar(Long id, ProductoEntity actualizado) {
+        ProductoEntity p = productoRepo.findById(id).orElseThrow();
         p.setNombre(actualizado.getNombre());
         p.setDescripcion(actualizado.getDescripcion());
         p.setPrecio(actualizado.getPrecio());

@@ -1,8 +1,7 @@
-// === Servicio para catalogo ===
 package com.example.comercio.service;
 
-import com.example.comercio.model.catalogo;
-import com.example.comercio.repository.catalogoRepository;
+import com.example.comercio.model.CatalogoEntity;
+import com.example.comercio.repository.CatalogoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,29 +9,29 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class catalogoServiceImpl implements catalogoService {
+public class CatalogoServiceImpl implements CatalogoService {
 
     @Autowired
-    private catalogoRepository catalogoRepo;
+    private CatalogoRepository catalogoRepo;
 
     @Override
-    public List<catalogo> listarCatalogos() {
+    public List<CatalogoEntity> listarCatalogos() {
         return catalogoRepo.findAll();
     }
 
     @Override
-    public Optional<catalogo> buscarPorId(Long id) {
+    public Optional<CatalogoEntity> buscarPorId(Long id) {
         return catalogoRepo.findById(id);
     }
 
     @Override
-    public catalogo crear(catalogo c) {
+    public CatalogoEntity crear(CatalogoEntity c) {
         return catalogoRepo.save(c);
     }
 
     @Override
-    public catalogo editar(Long id, catalogo actualizado) {
-        catalogo c = catalogoRepo.findById(id).orElseThrow();
+    public CatalogoEntity editar(Long id, CatalogoEntity actualizado) {
+        CatalogoEntity c = catalogoRepo.findById(id).orElseThrow();
         c.setNombre(actualizado.getNombre());
         c.setDescripcion(actualizado.getDescripcion());
         return catalogoRepo.save(c);

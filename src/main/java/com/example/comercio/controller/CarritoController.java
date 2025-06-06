@@ -1,23 +1,33 @@
 package com.example.comercio.controller;
 
-import com.example.comercio.model.carrito;
-import com.example.comercio.model.carritoProducto;
-import com.example.comercio.service.carritoService;
+import com.example.comercio.model.CarritoEntity;
+import com.example.comercio.model.CarritoProductoEntity;
+import com.example.comercio.service.CarritoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/carritos")
-public class carritoController {
+@RequestMapping("/api/carritos")
+@CrossOrigin(origins = "*")
+public class CarritoController {
 
     @Autowired
-    private carritoService service;
+    private CarritoService service;
 
     @GetMapping
-    public List<carrito> listar() {
+    public List<CarritoEntity> listar() {
         return service.listarCarritos();
     }
 
@@ -29,7 +39,7 @@ public class carritoController {
     }
 
     @PostMapping
-    public carrito crear(@RequestBody carrito c) {
+    public CarritoEntity crear(@RequestBody CarritoEntity c) {
         return service.crearCarrito(c);
     }
 
@@ -40,12 +50,12 @@ public class carritoController {
     }
 
     @PostMapping("/{id}/productos")
-    public carritoProducto agregarProducto(@PathVariable Long id, @RequestParam Long productoId, @RequestParam int cantidad) {
+    public CarritoProductoEntity agregarProducto(@PathVariable Long id, @RequestParam Long productoId, @RequestParam int cantidad) {
         return service.agregarProductoACarrito(id, productoId, cantidad);
     }
 
     @PutMapping("/producto/{carritoProductoId}")
-    public carritoProducto editarCantidad(@PathVariable Long carritoProductoId, @RequestParam int cantidad) {
+    public CarritoProductoEntity editarCantidad(@PathVariable Long carritoProductoId, @RequestParam int cantidad) {
         return service.editarCantidad(carritoProductoId, cantidad);
     }
 
@@ -56,7 +66,7 @@ public class carritoController {
     }
 
     @GetMapping("/{id}/productos")
-    public List<carritoProducto> listarProductos(@PathVariable Long id) {
+    public List<CarritoProductoEntity> listarProductos(@PathVariable Long id) {
         return service.listarProductosDeCarrito(id);
     }
 }
