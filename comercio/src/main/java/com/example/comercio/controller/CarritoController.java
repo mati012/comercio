@@ -72,7 +72,7 @@ public class CarritoController {
 
     @PostMapping("/{id}")
     public ResponseEntity<?> crearVentaDesdeCarrito(@PathVariable Long id) {
-        service.crearVentaDesdeCarrito(id);
+//        service.crearVentaDesdeCarrito(id);
         return ResponseEntity.ok("Se crea venta");
     }
 

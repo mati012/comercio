@@ -9,7 +9,7 @@ COPY target/*.jar app.jar
 COPY src/main/resources/wallet /app/wallet
 
 # Expone el puerto de Spring Boot
-EXPOSE 8080
+EXPOSE 8081
 
 # Ejecuta la aplicación
 ENTRYPOINT ["java", "-jar", "app.jar"]
