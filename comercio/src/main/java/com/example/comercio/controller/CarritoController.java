@@ -24,55 +24,55 @@ import java.util.List;
 public class CarritoController {
 
     @Autowired
-    private CarritoService service;
+    private CarritoService carritoService;
 
     @GetMapping
-    public List<CarritoEntity> listar() {
-        return service.listarCarritos();
+    public List<CarritoEntity> listarCarrito() {
+        return carritoService.listarCarritos();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
-        return service.buscarCarritoPorId(id)
+    public ResponseEntity<?> buscarCarritoPorId(@PathVariable Long id) {
+        return carritoService.buscarCarritoPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public CarritoEntity crear(@RequestBody CarritoEntity c) {
-        return service.crearCarrito(c);
+    public CarritoEntity crearCarrito(@RequestBody CarritoEntity c) {
+        return carritoService.crearCarrito(c);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminar(@PathVariable Long id) {
-        service.eliminarCarrito(id);
+        carritoService.eliminarCarrito(id);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/{id}/productos")
     public CarritoProductoEntity agregarProducto(@PathVariable Long id, @RequestParam Long productoId, @RequestParam int cantidad) {
-        return service.agregarProductoACarrito(id, productoId, cantidad);
+        return carritoService.agregarProductoACarrito(id, productoId, cantidad);
     }
 
     @PutMapping("/producto/{carritoProductoId}")
     public CarritoProductoEntity editarCantidad(@PathVariable Long carritoProductoId, @RequestParam int cantidad) {
-        return service.editarCantidad(carritoProductoId, cantidad);
+        return carritoService.editarCantidad(carritoProductoId, cantidad);
     }
 
     @DeleteMapping("/producto/{carritoProductoId}")
     public ResponseEntity<?> eliminarProducto(@PathVariable Long carritoProductoId) {
-        service.eliminarProductoDeCarrito(carritoProductoId);
+        carritoService.eliminarProductoDeCarrito(carritoProductoId);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}/productos")
     public List<CarritoProductoEntity> listarProductos(@PathVariable Long id) {
-        return service.listarProductosDeCarrito(id);
+        return carritoService.listarProductosDeCarrito(id);
     }
 
     @PostMapping("/{id}")
     public ResponseEntity<?> crearVentaDesdeCarrito(@PathVariable Long id) {
-//        service.crearVentaDesdeCarrito(id);
+        carritoService.crearVentaDesdeCarrito(id);
         return ResponseEntity.ok("Se crea venta");
     }
 
