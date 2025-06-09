@@ -1,0 +1,14 @@
+/Users/franciscapalma/Desktop/Bimestre V/Desarrollo Cloud Native I/Semana 3/ecommerce/venta/src/main/java/com/example/venta/dto/DetalleVentaDto.java
+/Users/franciscapalma/Desktop/Bimestre V/Desarrollo Cloud Native I/Semana 3/ecommerce/venta/src/main/java/com/example/venta/repository/DetalleVentaRepository.java
+/Users/franciscapalma/Desktop/Bimestre V/Desarrollo Cloud Native I/Semana 3/ecommerce/venta/src/main/java/com/example/venta/controller/VentaController.java
+/Users/franciscapalma/Desktop/Bimestre V/Desarrollo Cloud Native I/Semana 3/ecommerce/venta/src/main/java/com/example/venta/model/CarritoProductoEntity.java
+/Users/franciscapalma/Desktop/Bimestre V/Desarrollo Cloud Native I/Semana 3/ecommerce/venta/src/main/java/com/example/venta/config/WebConfig.java
+/Users/franciscapalma/Desktop/Bimestre V/Desarrollo Cloud Native I/Semana 3/ecommerce/venta/src/main/java/com/example/venta/service/VentaService.java
+/Users/franciscapalma/Desktop/Bimestre V/Desarrollo Cloud Native I/Semana 3/ecommerce/venta/src/main/java/com/example/venta/VentaApplication.java
+/Users/franciscapalma/Desktop/Bimestre V/Desarrollo Cloud Native I/Semana 3/ecommerce/venta/src/main/java/com/example/venta/model/CatalogoEntity.java
+/Users/franciscapalma/Desktop/Bimestre V/Desarrollo Cloud Native I/Semana 3/ecommerce/venta/src/main/java/com/example/venta/model/ProductoEntity.java
+/Users/franciscapalma/Desktop/Bimestre V/Desarrollo Cloud Native I/Semana 3/ecommerce/venta/src/main/java/com/example/venta/model/DetalleVentaEntity.java
+/Users/franciscapalma/Desktop/Bimestre V/Desarrollo Cloud Native I/Semana 3/ecommerce/venta/src/main/java/com/example/venta/dto/CarritoDto.java
+/Users/franciscapalma/Desktop/Bimestre V/Desarrollo Cloud Native I/Semana 3/ecommerce/venta/src/main/java/com/example/venta/model/CarritoEntity.java
+/Users/franciscapalma/Desktop/Bimestre V/Desarrollo Cloud Native I/Semana 3/ecommerce/venta/src/main/java/com/example/venta/config/SecurityConfig.java
+/Users/franciscapalma/Desktop/Bimestre V/Desarrollo Cloud Native I/Semana 3/ecommerce/venta/src/main/java/com/example/venta/service/VentaServiceImpl.java
