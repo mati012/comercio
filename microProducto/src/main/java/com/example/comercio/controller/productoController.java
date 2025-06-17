@@ -36,7 +36,7 @@ public class productoController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-    @PostMapping
+    @PostMapping("/crear")
     public ResponseEntity<String> enviarMensaje(@RequestBody producto p) {
         System.out.println("🔥 Llamado a /productos/enviar");
         try {
