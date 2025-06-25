@@ -24,4 +24,5 @@ public class RabbitMQConfig {
     public Binding binding(Queue queue, DirectExchange exchange) {
         return BindingBuilder.bind(queue).to(exchange).with(ROUTING_KEY);
     }
+    
 }

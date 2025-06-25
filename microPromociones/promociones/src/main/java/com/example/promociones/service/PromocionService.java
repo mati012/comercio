@@ -21,21 +21,16 @@ public class PromocionService {
         this.objectMapper = objectMapper;
     }
 
-    @Scheduled(fixedRate = 30000)
-    public void enviarPromocion() {
-        try {
+   @Scheduled(fixedRate = 30000)
+        public void enviarPromocion() {
             PromocionDto promocion = new PromocionDto(
                     idGenerator.getAndIncrement(),
                     "Descuento del " + (int) (10 + Math.random() * 20) + "%",
                     Math.round((10 + Math.random() * 20) * 100.0) / 100.0
             );
 
-            String mensajeJson = objectMapper.writeValueAsString(promocion);
-            rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, "routing.promocion", mensajeJson);
-
-            System.out.println("📢 Promoción enviada: " + mensajeJson);
-        } catch (Exception e) {
-            System.err.println("❌ Error al generar o enviar promoción: " + e.getMessage());
+            rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, "routing.promocion", promocion);
+            System.out.println("📢 Promoción enviada: " + promocion);
         }
-    }
+
 }

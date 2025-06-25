@@ -11,18 +11,15 @@ import org.springframework.web.bind.annotation.*;
 public class PromocionController {
 
     private final RabbitTemplate rabbitTemplate;
-    private final ObjectMapper objectMapper;
 
     public PromocionController(RabbitTemplate rabbitTemplate, ObjectMapper objectMapper) {
         this.rabbitTemplate = rabbitTemplate;
-        this.objectMapper = objectMapper;
     }
 
     @PostMapping
     public String enviarPromocionManual(@RequestBody PromocionDto promocion) {
         try {
-            String mensajeJson = objectMapper.writeValueAsString(promocion);
-            rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, "routing.promocion", mensajeJson);
+         rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, "routing.promocion", promocion);
             return "✅ Promoción enviada manualmente";
         } catch (Exception e) {
             return "❌ Error al enviar promoción: " + e.getMessage();
