@@ -18,9 +18,6 @@ import java.util.List;
 public class productoController {
     @Autowired
     private AmqpTemplate amqpTemplate;
-    
-    @Value("${cola.mensajes.nombre}")
-    private String queue;
 
     @Autowired
     private productoService service;
@@ -35,19 +32,6 @@ public class productoController {
         return service.buscarPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
-    }
-    @PostMapping("/crear")
-    public ResponseEntity<String> enviarMensaje(@RequestBody producto p) {
-        System.out.println("🔥 Llamado a /productos/enviar");
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            String mensaje = mapper.writeValueAsString(p);
-            amqpTemplate.convertAndSend(queue, mensaje);
-            return ResponseEntity.ok("📤 Mensaje enviado a RabbitMQ");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(500).body("❌ Error al enviar mensaje");
-        }
     }
 
 
