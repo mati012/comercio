@@ -38,14 +38,14 @@ public class VentaController {
         return ResponseEntity.ok("Se ha registra la venta correctamente");
     }
 
-    @PutMapping
+    @PutMapping("/actualizar")
     public ResponseEntity<String> actualizarVenta(@RequestBody DetalleVentaDto detalleVentaDto) {
         ventaService.actualizarDetalleVenta(detalleVentaDto);
         return ResponseEntity.ok("Se ha actualizado la venta exitosamente");
     }
 
-    @DeleteMapping("/eliminar")
-    public ResponseEntity<String> eliminarVenta(Long id) {
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<String> eliminarVenta(@PathVariable Long id) {
         ventaService.eliminarDetalleVentaById(id);
         return ResponseEntity.ok("Se elimina la venta correctamente");
     }

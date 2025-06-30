@@ -9,6 +9,7 @@ public class DetalleVentaMapper {
 
     public DetalleVentaDto detalleVentaEntityToDto(DetalleVentaEntity detalleVentaEntity) {
         return DetalleVentaDto.builder()
+                .id(detalleVentaEntity.getId())
                 .idCarrito(detalleVentaEntity.getIdCarrito())
                 .totalVenta(detalleVentaEntity.getTotalVenta())
                 .build();

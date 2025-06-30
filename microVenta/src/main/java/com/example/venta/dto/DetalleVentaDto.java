@@ -14,6 +14,7 @@ import java.io.Serializable;
 @Data
 public class DetalleVentaDto implements Serializable {
 
+    private Long id;
     private Long idCarrito;
     private double totalVenta;
 }
