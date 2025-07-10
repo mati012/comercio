@@ -80,13 +80,23 @@ public class KafkaConfig {
     // ——— CONSUMIDOR PARA EventoVenta ———
     @Bean
     public ConsumerFactory<String, EventoVenta> consumerFactoryVentas() {
+        // 1) arranca con las props que sí tienes (bootstrap.servers...)
+        Map<String, Object> props = kafkaProperties.buildConsumerProperties();
+        // 2) añade el group.id aquí (si no lo pones en properties)
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, "grupo-micro-inv");
+        // 3) indicas las clases de los deserializers
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+
+        // 4) creas la instancia indicando la clase objetivo y el paquete de confianza
         JsonDeserializer<EventoVenta> deserializer = new JsonDeserializer<>(EventoVenta.class);
         deserializer.addTrustedPackages("com.example.microinventariokafka.model");
 
-        Map<String, Object> props = kafkaProperties.buildConsumerProperties();
-        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, deserializer);
-        return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), deserializer);
+        // 5) construyes la fábrica pasándole la instancia
+        return new DefaultKafkaConsumerFactory<>(
+                props,
+                new StringDeserializer(),
+                deserializer);
     }
 
     @Bean
