@@ -7,8 +7,15 @@ services:
       ZOOKEEPER_SERVER_ID: 1
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
+      # --- aquí definimos el ensemble ---
+      ZOOKEEPER_SERVER_1: zookeeper1:2888:3888
+      ZOOKEEPER_SERVER_2: zookeeper2:2888:3888
+      ZOOKEEPER_SERVER_3: zookeeper3:2888:3888
     ports:
       - "2181:2181"
+      # expón también los puertos de quorum si quieres inspeccionarlos desde fuera:
+      - "2888:2888"
+      - "3888:3888"
     networks:
       - kafka-net
 
@@ -18,8 +25,13 @@ services:
       ZOOKEEPER_SERVER_ID: 2
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
+      ZOOKEEPER_SERVER_1: zookeeper1:2888:3888
+      ZOOKEEPER_SERVER_2: zookeeper2:2888:3888
+      ZOOKEEPER_SERVER_3: zookeeper3:2888:3888
     ports:
       - "2182:2181"
+      - "2889:2888"
+      - "3889:3888"
     networks:
       - kafka-net
 
@@ -29,11 +41,15 @@ services:
       ZOOKEEPER_SERVER_ID: 3
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
+      ZOOKEEPER_SERVER_1: zookeeper1:2888:3888
+      ZOOKEEPER_SERVER_2: zookeeper2:2888:3888
+      ZOOKEEPER_SERVER_3: zookeeper3:2888:3888
     ports:
       - "2183:2181"
+      - "2890:2888"
+      - "3890:3888"
     networks:
       - kafka-net
-
   kafka1:
     image: confluentinc/cp-kafka:7.5.0
     depends_on:
