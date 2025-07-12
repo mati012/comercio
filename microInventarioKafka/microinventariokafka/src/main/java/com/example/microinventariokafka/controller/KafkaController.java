@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 public class KafkaController {
@@ -18,6 +20,14 @@ public class KafkaController {
                           InventarioRepository repository) {
         this.kafkaTemplate = kafkaTemplate;
         this.repository = repository;
+    }
+
+    /**
+     * Devuelve todo el inventario.
+     */
+    @GetMapping("/inventario")
+    public ResponseEntity<List<Inventario>> obtenerTodoElInventario() {
+        return ResponseEntity.ok(repository.findAll());
     }
 
     /**
