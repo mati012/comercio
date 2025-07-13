@@ -3,11 +3,15 @@ package com.example.microinventariokafka.controller;
 import com.example.microinventariokafka.entity.Inventario;
 import com.example.microinventariokafka.model.EventoVenta;
 import com.example.microinventariokafka.repository.InventarioRepository;
+
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@Slf4j
 @RequestMapping("/api")
 public class KafkaController {
 
@@ -20,19 +24,19 @@ public class KafkaController {
         this.repository = repository;
     }
 
-    /**
-     * 1) Producir evento de venta en Kafka.
-     *    Esto dispara luego el @KafkaListener que procesa la venta.
-     */
     @PostMapping("/kafka/ventas")
     public ResponseEntity<Void> enviarEventoVenta(@RequestBody EventoVenta venta) {
-        kafkaTemplate.send("ventas", venta);
+        log.info("📤 Enviando evento de venta: {}", venta);
+
+        kafkaTemplate.send("ventas", venta)
+        .thenAccept(result -> System.out.println("Evento venta enviado con offset: " + result.getRecordMetadata().offset()))
+        .exceptionally(ex -> {
+            System.err.println("Error al enviar evento venta: " + ex.getMessage());
+            return null;
+        });
         return ResponseEntity.accepted().build();
     }
 
-    /**
-     * 3) Consultar stock actual en Oracle.
-     */
     @GetMapping("/inventario/{idProducto}")
     public ResponseEntity<Inventario> obtenerStock(@PathVariable String idProducto) {
         return repository.findById(idProducto)
