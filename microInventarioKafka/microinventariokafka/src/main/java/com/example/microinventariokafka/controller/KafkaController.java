@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @Slf4j
 @RequestMapping("/api")
@@ -24,6 +26,19 @@ public class KafkaController {
         this.repository = repository;
     }
 
+
+    /**
+     * Devuelve todo el inventario.
+     */
+    @GetMapping("/inventario")
+    public ResponseEntity<List<Inventario>> obtenerTodoElInventario() {
+        return ResponseEntity.ok(repository.findAll());
+    }
+
+    /**
+     * 1) Producir evento de venta en Kafka.
+     *    Esto dispara luego el @KafkaListener que procesa la venta.
+     */
     @PostMapping("/kafka/ventas")
     public ResponseEntity<Void> enviarEventoVenta(@RequestBody EventoVenta venta) {
         log.info("📤 Enviando evento de venta: {}", venta);
