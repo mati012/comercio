@@ -9,6 +9,8 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class VentaServiceConsumerImpl implements VentaServiceConsumer {
@@ -17,6 +19,12 @@ public class VentaServiceConsumerImpl implements VentaServiceConsumer {
 
     public VentaServiceConsumerImpl(DetalleVentaRepository detalleVentaRepository) {
         this.detalleVentaRepository = detalleVentaRepository;
+    }
+
+
+    @Override
+    public List<DetalleVentaEntity> obtenerDetalleVentas() {
+        return detalleVentaRepository.findAll();
     }
 
     @Transactional
@@ -29,11 +37,17 @@ public class VentaServiceConsumerImpl implements VentaServiceConsumer {
                 .build();
 
         if (detalleVentaDto.getId() != null) {
-            // Valida si es que existe el id y hace la actualizacion
             detalleVentaRepository.findById(detalleVentaDto.getId()).orElseThrow( () -> new Exception("No existe id para actualizar"));
             entity.setId(detalleVentaDto.getId());
         }
         DetalleVentaEntity entityCreada = detalleVentaRepository.save(entity);
         log.info("Se consume mensaje de detalle de venta desde kafka: [{}]", entityCreada);
     }
+
+    @Override
+    public void eliminarDetalleVenta(Long id) {
+        detalleVentaRepository.deleteById(id);
+    }
+
+
 }
