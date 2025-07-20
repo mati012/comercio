@@ -1,6 +1,6 @@
-package com.example.microventakafka.config;
+package com.example.micro.config;
 
-import com.example.microventakafka.dto.DetalleVentaDto;
+import com.example.micro.dto.DetalleVentaDto;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -28,7 +28,7 @@ public class KafkaConfig {
 
     @Bean
     public NewTopic ventasTopic() {
-        return TopicBuilder.name("detalleVentas")
+        return TopicBuilder.name("detalleVenta")
                 .partitions(3)
                 .replicas(1)
                 .build();
@@ -58,7 +58,7 @@ public class KafkaConfig {
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
 
         JsonDeserializer<DetalleVentaDto> deserializer = new JsonDeserializer<>(DetalleVentaDto.class);
-        deserializer.addTrustedPackages("com.example.microventakafka.dto");
+        deserializer.addTrustedPackages("com.example.micro.dto");
 
         return new DefaultKafkaConsumerFactory<>(
                 props,

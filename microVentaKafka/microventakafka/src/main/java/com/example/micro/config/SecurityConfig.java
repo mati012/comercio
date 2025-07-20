@@ -1,4 +1,4 @@
-package com.example.microventakafka.config;
+package com.example.micro.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

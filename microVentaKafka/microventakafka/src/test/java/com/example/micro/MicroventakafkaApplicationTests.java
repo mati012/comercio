@@ -1,4 +1,4 @@
-package com.example.microventakafka;
+package com.example.micro;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

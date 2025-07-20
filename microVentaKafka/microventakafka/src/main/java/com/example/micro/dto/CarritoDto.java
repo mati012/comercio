@@ -1,6 +1,6 @@
-package com.example.microventakafka.dto;
+package com.example.micro.dto;
 
-import com.example.microventakafka.entities.CarritoProductoEntity;
+import com.example.micro.entities.CarritoProductoEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

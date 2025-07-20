@@ -1,4 +1,4 @@
-package com.example.microventakafka;
+package com.example.micro;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
