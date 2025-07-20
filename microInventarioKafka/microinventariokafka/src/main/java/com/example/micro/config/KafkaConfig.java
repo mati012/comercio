@@ -1,5 +1,6 @@
 package com.example.micro.config;
 
+import com.example.micro.dto.DetalleVentaDto;
 import com.example.micro.model.EventoActualizacionInventario;
 import com.example.micro.model.EventoVenta;
 import org.apache.kafka.clients.admin.NewTopic;
@@ -40,6 +41,14 @@ public class KafkaConfig {
                 .build();
     }
 
+    @Bean
+    public NewTopic detalleVentaTopic() {
+        return TopicBuilder.name("detalleVenta")
+                .partitions(3)
+                .replicas(1)
+                .build();
+    }
+
     /** Crea el tópico "stock" si no existe */
     @Bean
     public NewTopic stockTopic() {
@@ -75,6 +84,19 @@ public class KafkaConfig {
     @Bean
     public KafkaTemplate<String, EventoActualizacionInventario> kafkaTemplateStock() {
         return new KafkaTemplate<>(producerFactoryStock());
+    }
+    // ——— PRODUCTOR PARA detalleVenta ———
+    @Bean
+    public ProducerFactory<String, DetalleVentaDto> producerFactoryDetalleVenta() {
+        Map<String, Object> props = kafkaProperties.buildProducerProperties();
+        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+        return new DefaultKafkaProducerFactory<>(props);
+    }
+
+    @Bean
+    public KafkaTemplate<String, DetalleVentaDto> kafkaTemplateDetalleVenta() {
+        return new KafkaTemplate<>(producerFactoryDetalleVenta());
     }
 
     // ——— CONSUMIDOR PARA EventoVenta ———
