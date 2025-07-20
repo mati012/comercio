@@ -1,4 +1,4 @@
-package com.example.microventakafka.entities;
+package com.example.micro.entities;
 
 import jakarta.persistence.*;
 import lombok.*;

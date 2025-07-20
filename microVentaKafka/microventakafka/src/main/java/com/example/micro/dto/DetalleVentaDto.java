@@ -1,4 +1,4 @@
-package com.example.microventakafka.dto;
+package com.example.micro.dto;
 
 import lombok.*;
 
